@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ignite Knowledge</title>
+    {#        加载 bootstrap5的模板      #}
+    <link rel="stylesheet" href="{% static 'bootstrap5/bootstrap.min.css' %}">
+    <script src="{%  static 'bootstrap5/bootstrap.min.css' %}"></script>
+    <script src="{%  static 'bootstrap5/popper.min.js' %}"></script>
+    <link rel="stylesheet" href="{%  static 'css/main.css' %}">
+</head>
+<body>
+<header class="p-3 text-bg-dark border-bottom border-bottom mb-3">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="#" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <img src="{% static 'image/logo.png' %}" alt="" height="40">
+        </a>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#" class="nav-link px-3 text-white-50">Main</a></li>
+          <li><a href="#" class="nav-link px-2 text-white-50">Record</a></li>
+          <li><a href="#" class="nav-link px-2 text-white-50">AI Review</a></li>
+          <li><a href="#" class="nav-link px-2 text-white-50">AI Explore</a></li>
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+          <input type="search" class="form-control form-control-dark text-bg-light" placeholder="Search..." aria-label="Search">
+        </form>
+
+        <div class="text-end">
+          <button type="button" class="btn btn-primary">sign in</button>
+          <button type="button" class="btn btn-outline-primary me-2">sign up</button>
+        </div>
+      </div>
+    </div>
+  </header>
+</body>
+</html>
