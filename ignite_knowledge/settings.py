@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # @linhaifeng 此处添加我的两个应用
     'notes',
-    'llm_app'
+    'llm_app',
+    # @linhaifeng 此处添加用于使用markdown编辑器
+    'mdeditor',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,10 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+MEDIA_ROOT = BASE_DIR / 'uploads'
+MEDIA_URL = '/media/'
+
+# @linhaifeng 此处django3.0+要加上，不然会出现异常
+X_FRAME_OPTIONS = 'SAMEORIGIN'

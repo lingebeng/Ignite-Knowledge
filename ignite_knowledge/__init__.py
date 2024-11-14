@@ -1,4 +1,5 @@
 """
+@linhaifeng
 注意这里一定要加，不然会报一个错误
 django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module.
 具体原因可能是接口有差异，也可能是版本的问题
