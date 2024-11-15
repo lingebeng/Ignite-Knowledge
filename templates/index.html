@@ -6,7 +6,7 @@
     <link rel="icon" href="{% static 'image/logo.png' %}" type="image/x-icon">
     {#        加载 bootstrap5的模板      #}
     <link rel="stylesheet" href="{% static 'bootstrap5/bootstrap.min.css' %}">
-    <script src="{%  static 'bootstrap5/bootstrap.min.css' %}"></script>
+    <script src="{%  static 'bootstrap5/bootstrap.min.js' %}"></script>
     <script src="{%  static 'bootstrap5/popper.min.js' %}"></script>
     <link rel="stylesheet" href="{%  static 'css/main.css' %}">
 </head>
@@ -19,7 +19,7 @@
         </a>
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="#" class="nav-link px-5 text-white">&ensp; Main</a></li>
-          <li><a href="#" class="nav-link px-2 text-success">Record</a></li>
+          <li><a href="/admin/notes/testmodel/add/" class="nav-link px-2 text-success">Record</a></li>
           <li><a href="#" class="nav-link px-2 text-success">AI Review</a></li>
           <li><a href="#" class="nav-link px-2 text-success">AI Explore</a></li>
         </ul>
