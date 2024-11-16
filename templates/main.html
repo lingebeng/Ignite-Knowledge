@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+    <div class="container bg-dark" style="flex:4;height: 100vh;">
+        <div class="p-3 text-white bg-dark">
+            <div style="height: 100vh; overflow-y: scroll;">
+                {% for note in notes %}
+                    <div class="card border-success mb-3">
+                        <div class="bg-primary-subtle card-header bg-transparent border-success fs-4">
+                            <a href="{% url 'show_notes' note_id=note.id %}"
+                               style="text-decoration: #a83434">{{ note.title }}</a>
+                        </div>
+                        <div class="card-body text-success" style="height: 100px">
+                            <p class="card-text">{{ note.outline }}</p>
+                        </div>
+                        <div class="bg-secondary-subtle card-footer bg-opacity-100 border-success fs-6">
+                            作者：{{ note.author }}&nbsp&nbsp&nbsp&nbsp 通用标签：{{ note.general_type }}&nbsp&nbsp&nbsp&nbsp
+                            内容标签：{{ note.content_type }}&nbsp&nbsp&nbsp&nbsp 更新时间：{{ note.update_date }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

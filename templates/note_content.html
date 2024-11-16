@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'highlight/styles/github-dark.min.css' %}">
+    <script src="{% static 'highlight/highlight.min.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+    <div class="container bg-dark p-3 rounded text-white" style="height: 100vh; overflow-y: scroll;">
+        <div>
+            <h1 style="text-align: center">{{ note.title }}</h1>
+            {% autoescape off %}
+            <br>
+            {% endautoescape %}
+        </div>
+        <div class="py-2">
+            {{ content|safe }}
+        </div>
+        <script>
+            hljs.highlightAll();
+        </script>
+    </div>
+
+{% endblock %}

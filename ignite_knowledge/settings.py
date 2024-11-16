@@ -143,5 +143,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = BASE_DIR / 'uploads'
 MEDIA_URL = '/media/'
 
+
+MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra',
+    'markdown.extensions.codehilite',
+    'markdown.extensions.toc',
+]
+
 # @linhaifeng 此处django3.0+要加上，不然会出现异常
 X_FRAME_OPTIONS = 'SAMEORIGIN'
