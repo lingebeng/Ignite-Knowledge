@@ -1,12 +1,11 @@
-{% extends "base.html" %}
+{% extends "index.html" %}
 {% block head %}
 
 {% endblock %}
 
 {% block main %}
-    <div class="container bg-dark" style="flex:4;height: 100vh;">
-        <div class="p-3 text-white bg-dark">
-            <div style="height: 100vh; overflow-y: scroll;">
+        <div class="p-3 text-primary">
+            <div>
                 {% for note in notes %}
                     <div class="card border-success mb-3">
                         <div class="bg-primary-subtle card-header bg-transparent border-success fs-4">
@@ -24,5 +23,4 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
 {% endblock %}

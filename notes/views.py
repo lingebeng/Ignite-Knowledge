@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 import markdown
-
+import re
 from ignite_knowledge import settings
 from .models import Notes
 
@@ -21,6 +21,9 @@ def show_notes(request,note_id):
         note = Notes.objects.get(pk=note_id)
     except Notes.DoesNotExist:
         note = None
-    html = markdown.markdown(note.content,extensions=settings.MARKDOWN_EXTENSIONS)
-    return render(request,"note_content.html",{"note":note,"content":html})
+    md = markdown.Markdown(extensions=settings.MARKDOWN_EXTENSIONS)
+    note.content = md.convert(note.content)
+    note_toc = md.toc
+    print(note_toc)
+    return render(request,"note_content.html",{"note":note,"toc":note_toc})
 

@@ -1,24 +1,65 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'highlight/styles/github-dark.min.css' %}">
     <script src="{% static 'highlight/highlight.min.js' %}"></script>
+    <style>
+        .sidebar {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .sidebar a:hover {
+            color: #007bff;
+        }
+
+        .sidebar ul ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .sidebar ul ul ul {
+            margin-left: 40px;
+        }
+
+    </style>
 {% endblock %}
 
 {% block main %}
-    <div class="container bg-dark p-3 rounded text-white" style="height: 100vh; overflow-y: scroll;">
+    <div class="p-3 rounded text-dark">
         <div>
             <h1 style="text-align: center">{{ note.title }}</h1>
             {% autoescape off %}
-            <br>
+                <br>
             {% endautoescape %}
         </div>
         <div class="py-2">
-            {{ content|safe }}
+            {{ note.content|safe }}
         </div>
         <script>
             hljs.highlightAll();
         </script>
     </div>
-
+    <div class="sidebar" style="position: fixed;right:6vw;top:12vh;">
+        {{ toc|safe }}
+    </div>
 {% endblock %}
