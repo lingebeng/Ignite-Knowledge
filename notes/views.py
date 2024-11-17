@@ -1,12 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import markdown
-import re
 from ignite_knowledge import settings
 from .models import Notes
-
-def index(request):
-    return render(request,'index.html')
 
 def main(request):
     notes = Notes.objects.all()
@@ -24,6 +20,14 @@ def show_notes(request,note_id):
     md = markdown.Markdown(extensions=settings.MARKDOWN_EXTENSIONS)
     note.content = md.convert(note.content)
     note_toc = md.toc
-    print(note_toc)
+    # print(note_toc)
     return render(request,"note_content.html",{"note":note,"toc":note_toc})
 
+def manage_notes(request):
+    notes = Notes.objects.all()
+    return render(request,"manage_note.html",{"notes":notes})
+
+def delete_note(request):
+    note_id = request.GET.get('id')
+    Notes.objects.filter(id=note_id).delete()
+    return redirect("/manage_notes")

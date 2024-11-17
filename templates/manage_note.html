@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+
+{% block head %}
+<style>
+  .table1 {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+      font-family: Consolas, sans-serif;
+      font-size:15px;
+      border-bottom: 0.3px solid #333131;
+      border-top: 0.3px solid #333131;
+      padding: 8px;
+      vertical-align: middle;
+  }
+</style>
+{% endblock %}
+
+{% block main %}
+    <table class="table1" style="background-color: #191818;color: #b0adad;">
+        <thead>
+        <tr>
+            <th>标题</th>
+            <th>更新时间</th>
+            <th>内容标签</th>
+            <th>通用标签</th>
+            <th>操作</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for note in notes %}
+            <tr>
+                <td>{{ note.title }}</td>
+                <td>{{ note.update_date }}</td>
+                <td>{{ note.content_type }}</td>
+                <td>{{ note.general_type }}</td>
+                <td>
+                    <a href="#" style="text-decoration: none;color:#436ec3">编辑</a>
+                </td>
+                <td>
+                    <a href="/delete_note/?id={{ note.id }}" style="text-decoration: none;color: #af3f3f">删除</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

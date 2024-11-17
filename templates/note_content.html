@@ -6,7 +6,7 @@
     <style>
         .sidebar {
             font-family: 'Arial', sans-serif;
-            background-color: #f9f9f9;
+            background-color: #191717;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -24,7 +24,7 @@
 
         .sidebar a {
             text-decoration: none;
-            color: #333;
+            color: #c3b8b8;
             font-weight: bold;
         }
 
@@ -45,13 +45,11 @@
 {% endblock %}
 
 {% block main %}
-    <div class="p-3 rounded text-dark">
-        <div>
-            <h1 style="text-align: center">{{ note.title }}</h1>
-            {% autoescape off %}
-                <br>
-            {% endautoescape %}
+    <div class="p-7 rounded" style="color:#bcb9b9;background-color: #191818;">
+        <div class="text-success">
+            <h1 style="text-align: center;font-family: Consolas,serif;font-weight:bold">{{ note.title }}</h1>
         </div>
+        <hr>
         <div class="py-2">
             {{ note.content|safe }}
         </div>
@@ -59,7 +57,7 @@
             hljs.highlightAll();
         </script>
     </div>
-    <div class="sidebar" style="position: fixed;right:6vw;top:12vh;">
+    <div class="sidebar" style="position: fixed;right:6vw;top:9.9vh;">
         {{ toc|safe }}
     </div>
 {% endblock %}
