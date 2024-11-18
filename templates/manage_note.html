@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block main %}
-    <table class="table1" style="background-color: #191818;color: #b0adad;">
+    <table class="table1" style="background-color: #191818;color: #c5c1c1;">
         <thead>
         <tr>
             <th>标题</th>
@@ -37,7 +37,7 @@
                 <td>{{ note.content_type }}</td>
                 <td>{{ note.general_type }}</td>
                 <td>
-                    <a href="#" style="text-decoration: none;color:#436ec3">编辑</a>
+                    <a href="/edit_note/?id={{ note.id }}" style="text-decoration: none;color:#436ec3">编辑</a>
                 </td>
                 <td>
                     <a href="/delete_note/?id={{ note.id }}" style="text-decoration: none;color: #af3f3f">删除</a>

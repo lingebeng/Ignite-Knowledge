@@ -9,9 +9,9 @@
     <script src="{% static 'bootstrap5/bootstrap.min.js' %}"></script>
     <script src="{% static 'bootstrap5/popper.min.js' %}"></script>
     <script src="{% static 'bootstrap5/bootstrap.bundle.min.js' %}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <style>
-    </style>
     {% block style %} {% endblock %}
     {% block head %} {% endblock %}
 </head>
@@ -31,7 +31,9 @@
                 <li><a href="#" class="nav-link px-2 text-success">AI Review</a></li>
                 <li><a href="#" class="nav-link px-2 text-success">AI Explore</a></li>
             </ul>
-
+            <a href="/record" style="margin-right: 24vw">
+                <img src="{% static 'image/record1.png' %}" alt="" height="40" style="{% if request.path == '/record' %} background-color: #086abc{% endif %}">
+            </a>
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                 <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
             </form>
@@ -54,9 +56,13 @@
         </div>
     </div>
 </header>
-
-<main class="mb-3 container p-3 rounded" style="width: 60vw;min-height: 85vh;background-color: #191818">
+<div class="navbar-nav-scroll" style="min-height: 90vh;">
+    <main class="mb-3 container p-3 rounded" style="width: 60vw;min-height: 87vh;background-color: #191818;">
     {% block main %}{% endblock %}
 </main>
+</div>
+<script type="text/javascript">
+  MathJax.Hub.Queue(["Typeset", MathJax.Hub, "mathjax-equation"]);
+</script>
 </body>
 </html>

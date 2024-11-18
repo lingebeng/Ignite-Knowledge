@@ -1,0 +1,115 @@
+{% extends 'index.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.css' %}">
+    <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.logo.css' %}">
+    <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.preview.css' %}">
+    <script src="{% static 'mdeditor/js/jquery.min.js' %}"></script>
+    <script src="{% static 'mdeditor/js/editormd.min.js' %}"></script>
+
+{% endblock %}
+
+{% block main %}
+    <form method="post">
+        {% csrf_token %}
+        <hr>
+        <div class="container text-white">
+            <div class="panel">
+                <div class="panel-body">
+                    <label class="text-white form-label"
+                           style="font-family: Consolas;font-weight: bold;font-style: italic">标题</label>
+                    <input value="{{ word }}" type="text" class="form-control"
+                           style="background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;" placeholder="请输入笔记标题">
+
+                    <label class="text-white form-label"
+                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">内容</label>
+                    <div>
+                        <div class="form-row field-content">
+                            <div class="flex-container">
+                                <div class="wmd-wrapper editormd editormd-vertical editormd-theme-default"
+                                     id="id_content-wmd-wrapper">
+                                    {#                     @linhaifeng:此处表示输入的内容     #}
+                                    <label>
+                                        <textarea name="content">{{ note.content }}</textarea>
+                                    </label>
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            editormd("id_content-wmd-wrapper", {
+                                                watch: true,
+                                                lineNumbers: false,
+                                                lineWrapping: false,
+                                                width: "100%",
+                                                height: "550px",
+                                                placeholder: '',
+
+                                                onfullscreen: function () {
+                                                    this.editor.css("border-radius", 10).css("z-index", 9999);
+                                                },
+                                                onfullscreenExit: function () {
+                                                    this.editor.css({
+                                                        zIndex: 10,
+                                                        border: "1px solid rgb(221,221,221)",
+                                                    })
+                                                    this.editor.css("border-radius", 10).css("z-index", 9999);
+                                                },
+                                                syncScrolling: "single",
+                                                path: "/static/mdeditor/js/lib" + "/",
+                                                // theme
+                                                theme: "dark",
+                                                previewTheme: "dark",
+                                                editorTheme: "default",
+
+                                                saveHTMLToTextarea: true, // editor.md 有问题没有测试成功
+                                                toolbarAutoFixed: true,
+                                                searchReplace: true,
+                                                emoji: true,
+                                                tex: true,
+                                                taskList: false,
+                                                flowChart: true,
+                                                sequenceDiagram: true,
+
+                                                imageUpload: true,
+                                                imageFormats: ['jpg', 'JPG', 'jpeg', 'JPEG', 'gif', 'GIF', 'png', 'PNG', 'bmp', 'BMP', 'webp', 'WEBP'],
+                                                imageUploadURL: "/mdeditor/uploads/",
+                                                toolbarIcons: function () {
+                                                    return ['undo', 'redo', '|', 'bold', 'del', 'italic', '|', 'list-ul', 'list-ol', 'hr', '|', 'link', 'reference-link', 'image', 'code', 'preformatted-text', 'code-block', 'table', 'datetime', 'html-entities', 'pagebreak', 'goto-line', '||', 'preview', 'watch', 'fullscreen']
+                                                },
+                                                onload: function () {
+                                                    console.log('onload', this);
+                                                    this.editor.css("border-color","#0a58ca").css("border-radius", 10)
+                                                    this.editor.find(".CodeMirror-scroll").css("background-color","#c7d4e6")
+
+                                                }
+                                            });
+                                        });
+
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label class="text-white form-label"
+                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">内容大意</label>
+                    <textarea name="outline" value="{{ word }}" type="text" class="form-control"
+                           style="font-family: Consolas;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;" placeholder="请输入笔记标题">{{ note.content }}</textarea>
+
+                    <label class="text-white form-label"
+                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">内容标签</label>
+                    <input name="content_type" type="text" class="form-control"
+                           style="background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;" placeholder="请输入笔记标题">
+
+                    <label class="text-white form-label"
+                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">通用标签</label>
+                    <input name="general_type" type="text" class="form-control"
+                           style="background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;" placeholder="请输入笔记标题">
+
+                    <div class="text-white form-label">
+                        <button type="submit" class="btn btn-success btn-lg" style="margin-top: 20px;margin-left: 27vw">提交</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
