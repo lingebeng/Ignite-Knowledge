@@ -38,10 +38,6 @@ def delete_note(request):
     Notes.objects.filter(id=note_id).delete()
     return redirect("/manage_notes")
 
-class NoteModelForm(forms.ModelForm):
-    class Meta:
-        model = Notes
-        fields = ['general_type',"content","outline"]
 
 
 def edit_notes(request):
@@ -50,14 +46,27 @@ def edit_notes(request):
         note = Notes.objects.get(pk=note_id)
     except Notes.DoesNotExist:
         note = None
-
     if request.method == "GET":
         return render(request, 'edit_notes.html',{"note":note})
     else:
+        title = request.POST.get('title')
         content = request.POST.get('content')
-        Notes.objects.filter(id=note_id).update(content=content)
+        outline = request.POST.get('outline')
+        content_type = request.POST.get('content_type')
+        general_type = request.POST.get('general_type')
+        from datetime import datetime
+        update_date = datetime.now()
+        Notes.objects.filter(id=note_id).update(title=title,content=content,outline=outline,content_type=content_type,general_type=general_type,update_date=update_date)
         return redirect("/manage_notes")
 
 def add_note(request):
-    form = NoteModelForm()
-    return render(request,"add_note.html",{"note":None,"form":form})
+    if request.method == "GET":
+        return render(request, 'add_note.html')
+    else:
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        outline = request.POST.get('outline')
+        content_type = request.POST.get('content_type')
+        general_type = request.POST.get('general_type')
+        Notes.objects.create(title=title,content=content,outline=outline,content_type=content_type,general_type=general_type)
+        return redirect("/manage_notes")
