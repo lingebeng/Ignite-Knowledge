@@ -29,7 +29,7 @@
                 <li><a href="{% url "main" %}" class="nav-link px-5 {% if request.path == '/main' %} text-white {% else %}text-success{% endif %}">Main</a></li>
                 <li><a href="{% url "manage_notes"%}" class="nav-link px-2  {% if request.path == '/manage_notes' %} text-white {% else %}text-success{% endif %}" >Manage</a></li>
                 <li><a href="#" class="nav-link px-2 text-success">AI Review</a></li>
-                <li><a href="#" class="nav-link px-2 text-success">AI Explore</a></li>
+                <li><a href="{% url "ai_explore" %}" class="nav-link px-2 {% if request.path == '/llm/ai_explore' %} text-white {% else %}text-success{% endif %}">AI Explore</a></li>
             </ul>
             <a href="/record" style="margin-right: 24vw">
                 <img src="{% static 'image/record1.png' %}" alt="" height="40" style="{% if request.path == '/record' %} background-color: #086abc{% endif %}">
@@ -57,7 +57,7 @@
     </div>
 </header>
 <div class="navbar-nav-scroll" style="min-height: 90vh;">
-    <main class="mb-3 container p-3 rounded" style="width: 60vw;min-height: 87vh;background-color: #191818;">
+    <main class="mb-3 container p-3 rounded" style="width: 60.6vw;min-height: 87vh;background-color: #191818;">
     {% block main %}{% endblock %}
 </main>
 </div>
