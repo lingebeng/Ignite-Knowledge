@@ -13,8 +13,8 @@ class Model:
         response = self.client.chat.completions.create(
             model="deepseek-chat",
             messages=messages,
-            temperature=2,
-            max_tokens=4096,
+            temperature=1.8,
+            max_tokens=1024,
         )
 
         gen_text = response.choices[0].message.content
@@ -24,3 +24,6 @@ class Model:
     def analyze(self):
         pass
 
+if __name__=="__main__":
+    model = Model(api_key="sk-91aafa6c4d68401c9fecb8245fdcd65d")
+    print(model.generate("Who are you?"))

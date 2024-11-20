@@ -1,29 +1,35 @@
 {% extends "index.html" %}
 {% block head %}
-
+    <link rel="stylesheet" href="{% static 'highlight/github-dark.min.css' %}">
+    <script src="{% static 'highlight/highlight.min.js' %}"></script>
 {% endblock %}
 
 {% block main %}
-    <div class="p-7 rounded" style="color:#bcb9b9;background-color: #191818;min-height: 70vh;margin-bottom: 3vh">
+    <hr>
+    <div class="p-7 rounded" style="color:#bcb9b9;background-color: #191818;min-height: 65vh;margin-bottom: 3vh">
 
 
-    <div class="py2" style="background-color: #191818;min-height: 70vh;font-family: Consolas,sans-serif;font-size: 20px;">
-        {{ gen_text|safe}}
-    </div>
+        <div class="py2"
+             style="background-color: #191818;min-height: 66vh;font-family: Consolas,sans-serif;font-size: 20px;">
+            {{ gen_text|safe }}
+        </div>
 
     </div>
     <form method="post">
-{% csrf_token %}
-    <textarea name="prompt" type="text" class="form-control scroll" onkeydown="submitOnCtrlEnter(event, this.form)"
-        style="overflow: hidden;max-height:10vh;font-family: Consolas,sans-serif;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;">{{ prompt }}</textarea>
+        {% csrf_token %}
+        <textarea id="prompt" name="prompt" type="text" class="form-control scroll"
+                  onkeydown="submitEnter(event, this.form)"
+                  style="overflow: hidden;max-height:10vh;font-family: Consolas,sans-serif;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;">{{ prompt }}</textarea>
     </form>
     <script>
-        function submitOnCtrlEnter(event, form) {
-            if (event.altKey) {
+
+        function submitEnter(event, form) {
+            if (event.key === "Enter") {
                 event.preventDefault();
                 form.submit();
             }
         }
+
         hljs.highlightAll();
     </script>
 

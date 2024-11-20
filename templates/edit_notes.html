@@ -95,14 +95,12 @@
                     <label class="text-white form-label"
                            style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">内容标签</label>
                     <input name="content_type" value="{{ note.content_type }}" type="text" class="form-control"
-                           style="background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;"
-                           placeholder="请输入笔记标题">
+                           style="background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;">
 
                     <label class="text-white form-label"
                            style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">通用标签</label>
                     <select class="form-select" name="general_type" type="text"
-                            style="background-color: #191818!important;color: #e6f0fd!important;border-color: #0a58ca!important;"
-                            placeholder="请输入笔记标题">
+                            style="background-color: #191818!important;color: #e6f0fd!important;border-color: #0a58ca!important;">
                         <option class="form-control" value="{{ note.general_type }}">---{{ note.general_type }}---</option>
                         <option class="form-control" value="Project">Project</option>
                         <option class="form-control" value="Area">Area</option>

@@ -10,4 +10,4 @@ venv/
 
 linhaifeng_tesing/
 
-config/llm-keys.txt
+/config/

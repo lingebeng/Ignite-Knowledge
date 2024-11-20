@@ -26,7 +26,9 @@ def show_notes(request,note_id):
         latex = latex.strip()
         transfer = f"""<div style="background-color:white"><img align="center" src="https://latex.codecogs.com/svg.latex?{latex}"></div>"""
         note.content = note.content.replace(latex,transfer)
-    note.content = note.content.replace("$", '')
+    content = note.content.replace("$", '')
+
+    note.content = re.sub(r'<img', r'<img class="diy-image" ', content)
     return render(request,"note_content.html",{"note":note,"toc":note_toc})
 
 def manage_notes(request):
@@ -47,6 +49,7 @@ def edit_notes(request):
     except Notes.DoesNotExist:
         note = None
     if request.method == "GET":
+        print(note.content)
         return render(request, 'edit_notes.html',{"note":note})
     else:
         title = request.POST.get('title')
@@ -65,8 +68,11 @@ def add_note(request):
     else:
         title = request.POST.get('title')
         content = request.POST.get('content')
+        print(f"content:{content}")
         outline = request.POST.get('outline')
         content_type = request.POST.get('content_type')
         general_type = request.POST.get('general_type')
-        Notes.objects.create(title=title,content=content,outline=outline,content_type=content_type,general_type=general_type)
+        from datetime import datetime
+        update_date = datetime.now()
+        Notes.objects.create(title=title,content=content,outline=outline,content_type=content_type,general_type=general_type,update_date=update_date)
         return redirect("/manage_notes")

@@ -40,7 +40,13 @@
         .sidebar ul ul ul {
             margin-left: 35px;
         }
-
+        a {
+            text-decoration:none;
+        }
+        .diy-image {
+            width: 600px;
+            height: 400px;
+        }
     </style>
 {% endblock %}
 
@@ -50,7 +56,7 @@
             <h1 style="text-align: center;font-family: Consolas,serif;font-weight:bold">{{ note.title }}</h1>
         </div>
         <hr>
-        <div class="py-2">
+        <div class="py-2" style="text-decoration: none;">
             {{ note.content|safe }}
         </div>
         <script>
