@@ -1,0 +1,118 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.css' %}">
+    <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.logo.css' %}">
+    <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.preview.css' %}">
+    <script src="{% static 'mdeditor/js/jquery.min.js' %}"></script>
+    <script src="{% static 'mdeditor/js/editormd.min.js' %}"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/mode/python/python.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/theme/monokai.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/mode/clike/clike.min.js"></script>
+
+
+    <style>
+        .CodeMirror {
+            border: 1px solid rgb(10, 87, 200);
+            border-radius: 6px;
+            height: 44vh;
+            font-family: Consolas, serif;
+            background-color: #191818 !important;
+        }
+
+        .CodeMirror-gutter {
+            background-color: #191818 !important;
+        }
+
+        .cm-s-monokai {
+            border-color: #0a58ca !important;
+        }
+
+        .CodeMirror-linenumber {
+            text-align: center;
+        }
+    </style>
+
+
+{% endblock %}
+
+{% block main %}
+
+    <form method="post" id="myForm">
+        {% csrf_token %}
+        <select name="language" id="language-select" class="form-select text-white"
+                style="background-color: #272822;margin-bottom: 20px;border:1px solid rgb(10,87,200);font-family: Consolas,serif"
+                value="{{ language }}">
+            <option value="python">Python</option>
+            <option value="text/x-c++src">C/Cpp</option>
+        </select>
+
+        <textarea id="code" name="code" placeholder="123">{{ code }}</textarea>
+
+        <label class="text-white form-label"
+               style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 2vh;">input</label>
+        <textarea id="input" name="input_data" class="form-control"
+                  style="overflow-y: hidden!important;font-family: Consolas;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;">{{ input_data }}</textarea>
+        <label class="text-white form-label"
+               style="margin-top: 2vh;font-family: Consolas;font-weight: bold;font-style: italic">output</label>
+        <textarea id="output" name="output_data" class="form-control"
+                  style="height: auto!important;overflow-y: hidden!important;font-family: Consolas;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;">{{ output_data }}</textarea>
+        <div class="text-white form-label">
+            <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 20px;margin-left: 27vw">
+                提交
+            </button>
+        </div>
+    </form>
+
+
+    <script>
+
+        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            mode: "python",
+            theme: "monokai",
+            lineNumbers: true,
+            smartIndent: true,
+            indentUnit: 4,
+            matchBrackets: true,
+            autoCloseBrackets: {
+                pairs: "()[]{}",  // 指定哪些括号是自动闭合的
+                triples: "",     // 指定哪些三重括号是自动闭合的
+                explode: "[]{}"  // 当用户输入一个括号时，自动生成全部的三重括号
+            }
+        });
+        document.getElementById("language-select").addEventListener("change", function () {
+            var selectedLanguage = this.value;
+            editor.setOption("mode", selectedLanguage);
+            // 根据需要引入相应语言的模式文件
+            CodeMirror.requireMode(selectedLanguage, function () {
+                editor.setOption("mode", selectedLanguage);
+            });
+        });
+
+
+        $(document).ready(function () {
+            $('#myForm').on('submit', function (event) {
+                event.preventDefault(); // 阻止表单默认提交行为
+                var data_send = {
+                    "language": document.getElementById('language-select').value,
+                    "code": document.getElementById('code').value,
+                    "input_data": document.getElementById('input').value,
+                };
+                {#var json_data = JSON.stringify(data_send);#}
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url 'exec_code' %}', // 你的Django视图URL
+                    data: data_send,
+                    dataType: 'json',
+                    success: function (response) {
+                        $('#output').text(response.data.output_data);
+                    },
+                });
+            });
+        });
+
+    </script>
+{% endblock %}

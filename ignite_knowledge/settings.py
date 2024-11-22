@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'llm_app',
     # @linhaifeng 此处添加用于使用markdown编辑器
     'mdeditor',
+    # @linhaifeng 此处添加用于codemirror，代码编辑器
+    'django_codemirror6',
 ]
 
 MIDDLEWARE = [
@@ -141,6 +143,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = BASE_DIR / 'uploads'
 MEDIA_URL = '/media/'
 
+EXEC_CODE = BASE_DIR / 'static' / 'code_exec'
 
 MARKDOWN_EXTENSIONS = [
     'markdown.extensions.extra',

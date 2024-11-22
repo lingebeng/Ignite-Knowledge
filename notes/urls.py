@@ -9,6 +9,8 @@ urlpatterns = [
     path("manage_notes",views.manage_notes,name="manage_notes"),
     path("delete_note/",views.delete_note,name="delete_note"),
     path("record",views.add_note,name="record"),
+    path("coding",views.coding,name="coding"),
+    path("exec_code",views.exec_code,name="exec_code"),
 ]
 
 

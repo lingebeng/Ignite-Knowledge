@@ -20,3 +20,5 @@ class Notes(models.Model):
         verbose_name = '笔记'
         verbose_name_plural = verbose_name
         ordering = ['-update_date','-general_type']
+
+
