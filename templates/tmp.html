@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.css' %}">
+    <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.logo.css' %}">
+    <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.preview.css' %}">
+    <script src="{% static 'mdeditor/js/jquery.min.js' %}"></script>
+    <script src="{% static 'mdeditor/js/editormd.min.js' %}"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/mode/python/python.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/theme/monokai.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/mode/clike/clike.min.js"></script>
+
+
+    <style>
+        .CodeMirror {
+            border-radius: 5px;
+            height: 60vh;
+            font-family: Consolas, serif;
+        }
+    </style>
+
+
+{% endblock %}
+
+{% block main %}
+    <select id="language-select" class="form-select text-white"
+            style="background-color: #272822;margin-bottom: 20px;border:1px solid rgb(39,40,34)">
+        <option value="python">Python</option>
+        <option value="text/x-c++src">C/Cpp</option>
+    </select>
+    <form method="post">
+        {% csrf_token %}
+        <textarea id="code-editor">
+
+        </textarea>
+    </form>
+
+
+
+    <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+            mode: "python",
+            theme: "monokai",
+            lineNumbers: true,
+            smartIndent: true,
+            indentUnit: 4,
+            matchBrackets: true,
+        });
+        document.getElementById("language-select").addEventListener("change", function () {
+            var selectedLanguage = this.value;
+            editor.setOption("mode", selectedLanguage);
+            // 根据需要引入相应语言的模式文件
+            CodeMirror.requireMode(selectedLanguage, function () {
+                editor.setOption("mode", selectedLanguage);
+            });
+        });
+    </script>
+{% endblock %}

@@ -13,12 +13,9 @@ class Notes(models.Model):
     publish_date = models.DateTimeField(auto_now_add=True,null=True)
     update_date = models.DateTimeField(auto_now=True,null=True)
 
-    def __str__(self):
-        return self.content
-
     class Meta:
-        verbose_name = '笔记'
-        verbose_name_plural = verbose_name
         ordering = ['-update_date','-general_type']
+
+
 
 

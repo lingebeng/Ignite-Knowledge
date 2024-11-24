@@ -36,9 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # @linhaifeng 此处添加我的两个应用
+    # @linhaifeng 此处添加我的三个应用
     'notes',
     'llm_app',
+    'codeforces',
     # @linhaifeng 此处添加用于使用markdown编辑器
     'mdeditor',
     # @linhaifeng 此处添加用于codemirror，代码编辑器

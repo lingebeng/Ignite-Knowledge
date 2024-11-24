@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.preview.css' %}">
     <script src="{% static 'mdeditor/js/jquery.min.js' %}"></script>
     <script src="{% static 'mdeditor/js/editormd.min.js' %}"></script>
-
+    <link rel="stylesheet" href="{% static 'highlight/github-dark.min.css' %}">
+    <script src="{% static 'highlight/highlight.min.js' %}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/codemirror.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/mode/python/python.min.js"></script>
@@ -34,12 +35,40 @@
         .CodeMirror-linenumber {
             text-align: center;
         }
+
+        .lhf_container {
+            display: flex;
+        }
+
+        .lhf_box {
+            flex: 1;
+        }
+
     </style>
 
 
 {% endblock %}
 
 {% block main %}
+    <div class="text-white" style="font-family: Consolas,serif">
+        <div class="lhf_container" style="font-family: 楷体">
+            <h3 class="lhf_box">{{ problem.id }}、{{ problem.title }}</h3>
+            <p style="float: left;font-weight: bold;color: #06d606!important;">{{ problem.algorithm_type }}</p>
+        </div>
+
+        <hr>
+        <div class="py-2" style="text-decoration: none;">
+            {{ problem.content|safe }}
+        </div>
+        <div class="py-2" style="text-decoration: none;">
+            {{ problem.example_input|safe }}
+        </div>
+        <div class="py-2" style="text-decoration: none;">
+            {{ problem.example_output|safe }}
+        </div>
+    </div>
+
+
 
     <form method="post" id="myForm">
         {% csrf_token %}
@@ -50,7 +79,7 @@
             <option value="text/x-c++src">C/Cpp</option>
         </select>
 
-        <textarea id="code" name="code" placeholder="123">{{ code }}</textarea>
+        <textarea id="code" name="code">{{ code }}</textarea>
 
         <label class="text-white form-label"
                style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 2vh;">input</label>
@@ -59,17 +88,31 @@
         <label class="text-white form-label"
                style="margin-top: 2vh;font-family: Consolas;font-weight: bold;font-style: italic">output</label>
         <textarea id="output" name="output_data" class="form-control"
-                  style="height: auto!important;overflow-y: hidden!important;font-family: Consolas;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;">{{ output_data }}</textarea>
-        <div class="text-white form-label">
-            <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 20px;margin-left: 27vw">
-                提交
+                  style="height: auto;overflow-y: hidden!important;font-family: Consolas;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;">{{ output_data }}</textarea>
+        <div class="text-white form-label" style="margin-top: 5vh;text-align: center">
+            <!-- Button trigger modal -->
+            <button id="submit_code" type="button" class="btn btn-success btn-lg" style="margin-right: 1vw;">交一个
             </button>
+            <button type="submit" class="btn btn-danger btn-lg">调试</button>
+            <button id="check" type="submit" class="btn btn-primary btn-lg" style="margin-left: 1vw">看答案</button>
         </div>
     </form>
 
 
-    <script>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="myModalLabel">提交结果</h1>
+                </div>
+                <div class="modal-body">
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
         var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
             mode: "python",
             theme: "monokai",
@@ -91,17 +134,14 @@
                 editor.setOption("mode", selectedLanguage);
             });
         });
-
-
         $(document).ready(function () {
             $('#myForm').on('submit', function (event) {
-                event.preventDefault(); // 阻止表单默认提交行为
+                event.preventDefault();
                 var data_send = {
                     "language": document.getElementById('language-select').value,
                     "code": document.getElementById('code').value,
                     "input_data": document.getElementById('input').value,
                 };
-                {#var json_data = JSON.stringify(data_send);#}
                 $.ajax({
                     type: 'POST',
                     url: '{% url 'exec_code' %}', // 你的Django视图URL
@@ -112,7 +152,42 @@
                     },
                 });
             });
-        });
 
+            $('#submit_code').click(function (event) {
+                event.preventDefault();
+                var data_send = {
+                    "id":{{ problem.id }},
+                    "language": document.getElementById('language-select').value,
+                    "code": document.getElementById('code').value,
+                };
+                $.ajax({
+                    url: '{% url "judge_result" %}',
+                    type: 'POST',
+                    data:data_send,
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#myModal .modal-body').html(data);
+                        $('#myModal').modal('show');
+                    },
+                });
+            });
+            $('#check').click(function (event) {
+                event.preventDefault();
+                var data_send = {
+                    "id":{{ problem.id }},
+                };
+                $.ajax({
+                    url: '{% url "check_result" %}',
+                    type: 'POST',
+                    data:data_send,
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#myModal .modal-body').html(data);
+                        $('#myModal').modal('show');
+                    },
+                });
+            });
+        });
+        hljs.highlightAll();
     </script>
 {% endblock %}

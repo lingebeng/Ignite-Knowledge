@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('notes.urls')),
     path('llm/', include('llm_app.urls')),
+    path('codeforces/', include('codeforces.urls')),
     path('mdeditor/',include('mdeditor.urls')),
 ]
 

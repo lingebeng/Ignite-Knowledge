@@ -30,8 +30,8 @@
                 <li><a href="{% url "manage_notes"%}" class="nav-link px-2  {% if request.path == '/manage_notes' %} text-white {% else %}text-success{% endif %}" >Manage</a></li>
                 <li><a href="#" class="nav-link px-2 text-success">AI Review</a></li>
                 <li><a href="{% url "ai_explore" %}" class="nav-link px-2 {% if request.path == '/llm/ai_explore' %} text-white {% else %}text-success{% endif %}">AI Explore</a></li>
-                <li><a href="{% url "coding" %}" class="nav-link px-2 {% if request.path == '/coding' %} text-white {% else %}text-success{% endif %}">Coding</a></li>
-
+                <li><a href="{% url "coding" %}" class="nav-link px-2 {% if request.path == '/codeforces/coding' %} text-white {% else %}text-success{% endif %}">Coding</a></li>
+{#                <li><a href="{% url "codeforces" %}" class="nav-link px-2 {% if request.path == '/codeforces' %} text-white {% else %}text-success{% endif %}">Codeforces</a></li>#}
             </ul>
             <a href="/record" style="margin-right: 24vw" class="nav col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
                 <img src="{% static 'image/record1.png' %}" alt="" height="40" style="{% if request.path == '/record' %} background-color: #086abc{% endif %}">
