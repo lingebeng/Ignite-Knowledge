@@ -14,7 +14,7 @@ def markdown_transfer(content,flag=True):
         all_latex = re.findall("\$(.*?)\$", content, re.S)
         for latex in all_latex:
             latex = latex.strip()
-            transfer = f"""<div style="background-color:white"><img align="center" src="https://latex.codecogs.com/svg.latex?{latex}"></div>"""
+            transfer = f"""<div style="background-color:white;text-align:center;border: green solid 1px;""><img src="https://latex.codecogs.com/svg.latex?{latex}"></div>"""
             content = content.replace(latex, transfer)
         content = content.replace("$", '')
         content = re.sub(r'<img', r'<img class="diy-image" ', content)

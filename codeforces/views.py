@@ -113,15 +113,37 @@ def judge_result(request):
         with open(out_file, 'r') as f:
             result = f.read()
 
+        flag = True
+        for x,y in zip(result.split('\n'),test_output.split('\n')):
 
-        if result.strip('\n') == test_output.strip('\n'):
+            x = x.strip()
+            y = y.strip()
+            if x != y:
+                flag = False
+                break
+
+        if flag:
             return JsonResponse('''<h1 style="color: green;text-align: center;">AC</h1>''', safe=False)
         else:
             return JsonResponse('''<h1 style="color: red;text-align: center;">WA</h1>''', safe=False)
 @csrf_exempt
 def check_result(request):
     problem_id = request.POST["id"]
+    answer = ""
     check_code = CodeForces.objects.get(pk=problem_id).code
-    check_code = markdown_transfer(check_code,False)
-    print(check_code)
-    return JsonResponse(check_code, safe=False)
+    remarks = CodeForces.objects.get(pk=problem_id).remarks
+
+    answer = check_code + "\n\n---\n" + remarks
+    answer = markdown_transfer(answer,False)
+
+    return JsonResponse(answer, safe=False)
+
+def manage_problems(request):
+    problem_set = CodeForces.objects.all()
+    return render(request,"manage_problems.html",{"problem_set":problem_set})
+
+
+def delete_problem(request):
+    problem_id = request.GET.get('id')
+    CodeForces.objects.filter(id=problem_id).delete()
+    return redirect("/manage_problems")
