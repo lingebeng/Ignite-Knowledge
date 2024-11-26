@@ -6,13 +6,14 @@
 {% block main %}
         <div class="p-3 text-primary">
             <div>
+                <hr>
                 {% for note in notes %}
                     <div class="card mb-4" style="background-color: #191818;border-color: #191818;">
                         <div class="card-header bg-transparent fs-3" style="border-color: #191818;">
                             <a href="{% url 'show_notes' note_id=note.id %}"
                                style="text-decoration: #ead9d9;font-style: italic;font-family: Consolas;font-weight: bold">{{ note.title }}</a>
                         </div>
-                        <div class="card-body text-success fs-5" style="height: 15vh;border-color: #191818;font-family: Consolas,serif;">
+                        <div class="card-body text-success fs-5" style="height: 10vh;border-color: #191818;font-family: Consolas,serif;">
                             <p class="card-text">{{ note.outline }}</p>
                         </div>
                         <div class="card-footer bg-opacity-100 fs-6" style="color: #808585;border-color: #191818;font-family: Consolas,serif;">

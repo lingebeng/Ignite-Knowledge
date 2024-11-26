@@ -15,7 +15,7 @@
     {% block style %} {% endblock %}
     {% block head %} {% endblock %}
 </head>
-<body style="background-color: #403f3f">
+<body style="background-color: #1e1d1d">
 
 <header class="mb-3 p-2 text-bg-dark">
     <div class="container">
@@ -38,7 +38,11 @@
                 <img src="{% static 'image/coding.png' %}" alt="" height="40" style="{% if request.path == '/codeforces/coding' %} background-color: #086abc{% endif %}">
             </a>
 
-            <a href="/record" style="margin-right: 24vw" class="nav col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+            <a href="/codeforces/add_problem" style="margin-right: 24vw" class="nav col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                <img src="{% static 'image/add_problem.png' %}" alt="" height="25" style="{% if request.path == '/codeforces/add_problem' %} background-color: #086abc{% endif %}">
+            </a>
+
+            <a href="/record" class="nav col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
                 <img src="{% static 'image/record1.png' %}" alt="" height="35" style="{% if request.path == '/record' %} background-color: #086abc{% endif %}">
             </a>
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">

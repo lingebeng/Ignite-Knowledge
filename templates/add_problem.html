@@ -17,12 +17,12 @@
                 <div class="panel-body">
                     <label class="text-white form-label"
                            style="font-family: Consolas;font-weight: bold;font-style: italic">标题</label>
-                    <input name="title" value="{{ note.title }}" type="text" class="form-control"
+                    <input name="title" type="text" class="form-control"
                            style="background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;"
                            placeholder="请输入笔记标题">
 
                     <label class="text-white form-label"
-                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">内容</label>
+                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">题目内容</label>
                     <div>
                         <div class="form-row field-content">
                             <div class="flex-container">
@@ -87,25 +87,43 @@
                     </div>
 
                     <label class="text-white form-label"
-                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">内容大意</label>
-                    <textarea name="outline" type="text" class="form-control"
-                              style="font-family: Consolas;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;">{{ note.outline }}</textarea>
-
-                    <label class="text-white form-label"
-                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">内容标签</label>
-                    <input name="content_type" value="{{ note.content_type }}" type="text" class="form-control"
+                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">算法标签</label>
+                    <input name="algorithm_type" type="text" class="form-control"
                            style="background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;">
 
                     <label class="text-white form-label"
-                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">通用标签</label>
-                    <select class="form-select" name="general_type" type="text"
-                            style="background-color: #191818!important;color: #e6f0fd!important;border-color: #0a58ca!important;">
-                        <option class="form-control" value="{{ note.general_type }}">---{{ note.general_type }}---</option>
-                        <option class="form-control" value="Project">Project</option>
-                        <option class="form-control" value="Area">Area</option>
-                        <option class="form-control" value="Resource">Resource</option>
-                        <option class="form-control" value="Archive">Archive</option>
-                    </select>
+                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">示例输入</label>
+                    <textarea name="example_input" type="text" class="form-control"
+                              style="font-family: Consolas;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;"></textarea>
+
+                    <label class="text-white form-label"
+                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">示例输出</label>
+                    <textarea name="example_output" type="text" class="form-control"
+                              style="font-family: Consolas;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;"></textarea>
+
+
+                    <label class="text-white form-label"
+                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">测试输入</label>
+                    <textarea name="test_input" type="text" class="form-control"
+                              style="font-family: Consolas;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;"></textarea>
+
+                    <label class="text-white form-label"
+                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">测试输出</label>
+                    <textarea name="test_output" type="text" class="form-control"
+                              style="font-family: Consolas;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;"></textarea>
+
+                    <label class="text-white form-label"
+                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">备注</label>
+                    <textarea name="remarks" type="text" class="form-control"
+                              style="font-family: Consolas;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;"></textarea>
+
+
+                    <label class="text-white form-label"
+                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">参考代码</label>
+                    <textarea name="code" type="text" class="form-control"
+                              style="font-family: Consolas;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;"></textarea>
+
+
                     <div class="text-white form-label">
                         <button type="submit" class="btn btn-success btn-lg" style="margin-top: 20px;margin-left: 27vw">
                             提交

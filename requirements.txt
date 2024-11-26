@@ -4,3 +4,4 @@ markdown~=3.7
 django-mdeditor~=0.1.20
 Pygments~=2.18.0
 openai~=1.54.4
+django-codemirror6~=1.0.1

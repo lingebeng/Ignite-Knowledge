@@ -1,45 +1,47 @@
 {% extends 'index.html' %}
 
 {% block head %}
-<style>
-  th, td {
-      font-family: Consolas, sans-serif;
-      font-size:15px;
-      border-bottom: 0.3px solid #333131;
-      border-top: 0.3px solid #333131;
-      padding: 8px;
-      vertical-align: middle;
-  }
-</style>
+    <style>
+        td {
+            font-family: Consolas;
+            font-size: 15px;
+            border-bottom: 0.3px solid #333131;
+            border-top: 0.3px solid #333131;
+            padding: 8px;
+            vertical-align: middle;
+            font-weight: bold;
+        }
+    </style>
 {% endblock %}
 
 {% block main %}
-    <table class="table table-bordered" style="background-color: #191818;color: #c5c1c1;font-family: Consolas,sans-serif">
-        <thead>
-        <tr>
-            <th>标题</th>
-            <th>算法标签</th>
-            <th>操作</th>
-            <th>操作</th>
-            <th>操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for problem in problem_set %}
-            <tr>
-                <td>{{ problem.title }}</td>
-                <td>{{ problem.algorithm_type }}</td>
-                <td>
-                    <a class="btn btn-primary btn-sm" style="text-align: center" href="/codeforces/edit_problem/?id={{ problem.id }}">编辑</a>
-                </td>
-                <td>
-                    <a class="btn btn-danger btn-sm" href="/codeforces/delete_problem/?id={{ problem.id }}">删除</a>
-                </td>
-                <td>
-                    <a class="btn btn-success btn-sm" href="/codeforces/codeforces/{{ problem.id }}">敲代码</a>
-                </td>
+        <table class="table table-bordered" style="background-color: #191818!important;color: #c5c1c1;font-family: Consolas">
+            <thead>
+            <tr style="font-size: 20px;">
+                <th>标题</th>
+                <th>算法标签</th>
+                <th>操作</th>
+                <th>操作</th>
+                <th>操作</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for problem in problem_set %}
+                <tr>
+                    <td>{{ problem.title }}</td>
+                    <td>{{ problem.algorithm_type }}</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" style="text-align: center"
+                           href="/codeforces/edit_problem/?id={{ problem.id }}">编辑</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger btn-sm" href="/codeforces/delete_problem/?id={{ problem.id }}">删除</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-success btn-sm" href="/codeforces/codeforces/{{ problem.id }}">敲代码</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 {% endblock %}

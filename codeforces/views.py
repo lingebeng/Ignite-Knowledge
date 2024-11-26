@@ -146,4 +146,47 @@ def manage_problems(request):
 def delete_problem(request):
     problem_id = request.GET.get('id')
     CodeForces.objects.filter(id=problem_id).delete()
-    return redirect("/manage_problems")
+    return redirect("/codeforces/manage_problems")
+
+def add_problem(request):
+    if request.method == "GET":
+        return render(request, 'add_problem.html')
+    else:
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        algorithm_type = request.POST.get('algorithm_type')
+        example_input = request.POST.get('example_input')
+        example_output = request.POST.get('example_output')
+        test_input = request.POST.get('test_input')
+        test_output = request.POST.get('test_output')
+        remarks = request.POST.get('remarks')
+        code = request.POST.get('code')
+        from datetime import datetime
+        update_date = datetime.now()
+        CodeForces.objects.create(title=title,content=content,algorithm_type=algorithm_type,example_input=example_input,example_output=example_output,test_input= test_input,test_output=test_output,remarks=remarks,code=code,update_date=update_date)
+        return redirect("/codeforces/manage_problems")
+
+def edit_problem(request):
+    problem_id = request.GET.get('id')
+    try:
+        problem = CodeForces.objects.get(pk=problem_id)
+    except CodeForces.DoesNotExist:
+        problem = None
+
+    if request.method == "GET":
+        return render(request, 'edit_problem.html', {"problem": problem})
+
+    else:
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        algorithm_type = request.POST.get('algorithm_type')
+        example_input = request.POST.get('example_input')
+        example_output = request.POST.get('example_output')
+        test_input = request.POST.get('test_input')
+        test_output = request.POST.get('test_output')
+        remarks = request.POST.get('remarks')
+        code = request.POST.get('code')
+        from datetime import datetime
+        update_date = datetime.now()
+        CodeForces.objects.filter(id=problem_id).update(title=title,content=content,algorithm_type=algorithm_type,example_input=example_input,example_output=example_output,test_input= test_input,test_output=test_output,remarks=remarks,code=code,update_date=update_date)
+        return redirect("/codeforces/manage_problems")
