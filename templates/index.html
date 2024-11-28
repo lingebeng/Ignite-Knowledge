@@ -28,9 +28,8 @@
     {# @linhaifeng {% if request.path == '/main' %} text-white {% else %}text-success{% endif %} this is really a magic operation!#}
                 <li><a href="{% url "main" %}" class="nav-link px-5 {% if request.path == '/main' %} text-white {% else %}text-success{% endif %}">Main</a></li>
                 <li><a href="{% url "manage_notes"%}" class="nav-link px-2  {% if request.path == '/manage_notes' %} text-white {% else %}text-success{% endif %}" >Manage</a></li>
-                <li><a href="#" class="nav-link px-2 text-success">AI Review</a></li>
+                <li><a href="{% url "ai_review" %}" class="nav-link px-2 {% if request.path == '/llm/ai_review' %} text-white {% else %}text-success{% endif %}">AI Review</a></li>
                 <li><a href="{% url "ai_explore" %}" class="nav-link px-2 {% if request.path == '/llm/ai_explore' %} text-white {% else %}text-success{% endif %}">AI Explore</a></li>
-                <li><a href="{% url "coding" %}" class="nav-link px-2 {% if request.path == '/codeforces/coding' %} text-white {% else %}text-success{% endif %}">Coding</a></li>
                 <li><a href="{% url "manage_problems" %}" class="nav-link px-2 {% if request.path == '/codeforces/manage_problems' %} text-white {% else %}text-success{% endif %}">Codeforces</a></li>
             </ul>
 

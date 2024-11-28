@@ -146,6 +146,9 @@ MEDIA_URL = '/media/'
 
 EXEC_CODE = BASE_DIR / 'static' / 'code_exec'
 
+EMBEDDING_ROOT = BASE_DIR / 'static' / 'bge-small-zh-v1.5'
+VECTOR_ROOT = BASE_DIR / 'static' / 'vector'
+
 MARKDOWN_EXTENSIONS = [
     'markdown.extensions.extra',
     'markdown.extensions.codehilite',

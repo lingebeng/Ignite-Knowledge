@@ -79,20 +79,19 @@
             <option value="text/x-c++src">C/Cpp</option>
         </select>
 
-        <textarea id="code" name="code">{{ code }}</textarea>
+        <textarea id="code" name="code">{{ problem.pre_code }}</textarea>
 
         <label class="text-white form-label"
                style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 2vh;">input</label>
         <textarea id="input" name="input_data" class="form-control"
-                  style="overflow-y: hidden!important;font-family: Consolas;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;">{{ input_data }}</textarea>
+                  style="overflow-y: hidden!important;font-family: Consolas;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;">{{ example_input }}</textarea>
         <label class="text-white form-label"
                style="margin-top: 2vh;font-family: Consolas;font-weight: bold;font-style: italic">output</label>
         <textarea id="output" name="output_data" class="form-control"
                   style="height: auto;overflow-y: hidden!important;font-family: Consolas;font-size: 20px;background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;">{{ output_data }}</textarea>
         <div class="text-white form-label" style="margin-top: 5vh;text-align: center">
             <!-- Button trigger modal -->
-            <button id="submit_code" type="button" class="btn btn-success btn-lg" style="margin-right: 1vw;">交一个
-            </button>
+            <button id="submit_code" type="button" class="btn btn-success btn-lg" style="margin-right: 1vw;">交一个</button>
             <button type="submit" class="btn btn-danger btn-lg">调试</button>
             <button id="check" type="submit" class="btn btn-primary btn-lg" style="margin-left: 1vw">看答案</button>
         </div>

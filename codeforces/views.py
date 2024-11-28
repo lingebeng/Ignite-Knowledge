@@ -76,6 +76,7 @@ def codeforces(request,problem_id):
     except CodeForces.DoesNotExist:
         problem = None
 
+    example_input = problem.example_input
     problem.example_input = "input\n```python\n" + problem.example_input + "\n```\n"
     problem.example_output = "output\n```python\n" + problem.example_output + "\n```\n"
     problem.content = problem.content + "\n\n---\n"
@@ -83,7 +84,7 @@ def codeforces(request,problem_id):
     problem.example_input = markdown_transfer(problem.example_input,False)
     problem.example_output = markdown_transfer(problem.example_output,False)
 
-    return render(request,"codeforces.html",{"problem":problem})
+    return render(request,"codeforces.html",{"problem":problem,"example_input":example_input})
 
 @csrf_exempt
 def judge_result(request):

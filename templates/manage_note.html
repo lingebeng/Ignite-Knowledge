@@ -27,6 +27,7 @@
             <th>通用标签</th>
             <th>操作</th>
             <th>操作</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
@@ -36,6 +37,9 @@
                 <td>{{ note.update_date }}</td>
                 <td>{{ note.content_type }}</td>
                 <td>{{ note.general_type }}</td>
+                <td>
+                    <a href="/show_notes/{{ note.id }}" style="text-decoration: none;color:#47c343">进入</a>
+                </td>
                 <td>
                     <a href="/edit_note/?id={{ note.id }}" style="text-decoration: none;color:#436ec3">编辑</a>
                 </td>

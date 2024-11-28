@@ -26,6 +26,14 @@ def ai_explore(request):
     return render(request, 'ai_explore.html',{"prompt":prompt,"gen_text":gen_text})
 
 
+def ai_review(request):
+    if request.method == 'POST':
+        file = request.FILES['file']
+        file_content = file.read()
+        print(file_content.decode("utf-8"))
+        # print(gen_text)
+    return render(request, 'ai_review.html')
+
 
 # 放弃流式输出了，不会搞 @linhaifeng
 # @require_GET
