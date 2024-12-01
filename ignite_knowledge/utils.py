@@ -2,14 +2,11 @@ import re
 from langchain_core.messages import SystemMessage,HumanMessage
 import markdown
 from dotenv import load_dotenv
-from langchain_community.document_loaders import UnstructuredMarkdownLoader
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_openai import ChatOpenAI
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma.vectorstores import Chroma
 from django.conf import settings
-
-# from settings import EMBEDDING_ROOT,VECTOR_ROOT,MARKDOWN_EXTENSIONS
 
 # 将markdown转换成html，其中添加了行内latex公式的转换！
 def markdown_transfer(content,flag=True):
@@ -31,7 +28,13 @@ def markdown_transfer(content,flag=True):
     else:
         return content
 
+class Model:
+    def __init__(self):
+        load_dotenv()
+        self.model = ChatOpenAI(model="qwen-plus")
 
+    def invoke(self,message):
+        return self.model.invoke(message).content
 
 class RAG:
     def __init__(self,data,model_name):
@@ -49,6 +52,7 @@ class RAG:
         )
 
         self.split_content = splitter.split_documents(self.data)
+        print("--",self.split_content)
 
     def vector_persist(self,persist_filename):
         self.persist_filename = persist_filename
@@ -56,7 +60,7 @@ class RAG:
         encode_kwargs = {'normalize_embeddings': False}
         self.embedding_model = HuggingFaceEmbeddings(model_name=self.embedding_model_name,model_kwargs=model_kwargs,encode_kwargs=encode_kwargs)
         if self.split_content is None:
-            assert "Please input some contents"
+            print("Please input some contents")
         else:
             Chroma.from_documents(self.split_content, self.embedding_model, persist_directory=self.persist_filename)
 
@@ -75,24 +79,5 @@ class RAG:
         answer = self.model.invoke(messages).content
 
         return answer
-
-if __name__ == "__main__":
-    loader = UnstructuredMarkdownLoader("test.md")
-    data = loader.load()
-    embedding_model = str(EMBEDDING_ROOT)
-    vector_name = str(VECTOR_ROOT)
-    rag = RAG(data,embedding_model)
-
-    rag.split_chunk(250,30)
-
-    rag.vector_persist(vector_name)
-
-    while 1:
-        try:
-            question = input("user:")
-            answer = rag.knowledge_quiz(question)
-            print(answer)
-        except:
-            print("这个问题有点难回答哦！")
 
 

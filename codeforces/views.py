@@ -130,7 +130,6 @@ def judge_result(request):
 @csrf_exempt
 def check_result(request):
     problem_id = request.POST["id"]
-    answer = ""
     check_code = CodeForces.objects.get(pk=problem_id).code
     remarks = CodeForces.objects.get(pk=problem_id).remarks
 

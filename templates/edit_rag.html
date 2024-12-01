@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.css' %}">
+    <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.logo.css' %}">
+    <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.preview.css' %}">
+    <script src="{% static 'mdeditor/js/jquery.min.js' %}"></script>
+    <script src="{% static 'mdeditor/js/editormd.min.js' %}"></script>
+
+{% endblock %}
+
+{% block main %}
+    <form method="post">
+        {% csrf_token %}
+        <hr>
+        <div class="container text-white">
+            <div class="panel">
+                <div class="panel-body">
+                    <label class="text-white form-label"
+                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">向量数据库名称</label>
+                    <input name="name" value="{{ rag.name }}" type="text" class="form-control"
+                           style="background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;">
+
+                    <label class="text-white form-label"
+                           style="font-family: Consolas;font-weight: bold;font-style: italic;margin-top: 10px">内容标签</label>
+                    <input name="content_type" value="{{ rag.content_type }}" type="text" class="form-control"
+                           style="background-color: #191818;color: #e6f0fd;border-color: #0a58ca!important;">
+
+                    <div class="text-white form-label">
+                        <button type="submit" class="btn btn-success btn-lg" style="margin-top: 20px;margin-left: 27vw">
+                            提交
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

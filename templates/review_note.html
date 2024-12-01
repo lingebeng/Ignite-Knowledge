@@ -1,0 +1,69 @@
+{% extends "index.html" %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'highlight/github-dark.min.css' %}">
+    <script src="{% static 'highlight/highlight.min.js' %}"></script>
+        <script src="{% static 'mdeditor/js/jquery.min.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+    <hr>
+    <div class="p-7 rounded" style="color:#bcb9b9;background-color: #191818;min-height: 65vh;margin-bottom: 3vh;">
+        <div class="py2"
+             style="background-color: #191818;min-height: 66vh;font-family: Consolas,sans-serif;font-size: 20px;">
+            {{ summary|safe }}
+        </div>
+        <hr>
+        <div class="py2" id="question1"
+             style="background-color: #191818;font-family: Consolas,sans-serif;font-size: 20px;">
+            {{ q1|safe }}
+            <div class="question1">
+
+            </div>
+            <hr>
+        </div>
+        <div class="py2" id="question2"
+             style="background-color: #191818;font-family: Consolas,sans-serif;font-size: 20px;">
+            {{ q2|safe }}
+            <div class="question2">
+
+            </div>
+            <hr>
+        </div>
+        <div class="py2" id="question3"
+             style="background-color: #191818;font-family: Consolas,sans-serif;font-size: 20px;">
+            {{ q3|safe }}
+            <div class="question3">
+
+            </div>
+            <hr>
+        </div>
+        <form method="post" id="myForm">
+        {% csrf_token %}
+        <div class="text-white form-label" style="margin-top: 5vh;text-align: center">
+            <button id="show_answer" type="button" class="btn btn-success btn-lg">显示答案</button>
+        </div>
+        </form>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#show_answer').click(function (event) {
+                var data_send = {
+                    "language": "python"
+                };
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url 'show_answer' %}',
+                    data:data_send,
+                    dataType: 'json',
+                    success: function (response) {
+                        $('#question1 .question1').html(response.data.answer1);
+                        $('#question2 .question2').html(response.data.answer2);
+                        $('#question3 .question3').html(response.data.answer3);
+                    },
+                });
+            });
+        });
+        hljs.highlightAll();
+    </script>
+{% endblock %}
+

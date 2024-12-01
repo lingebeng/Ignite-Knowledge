@@ -144,10 +144,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = BASE_DIR / 'uploads'
 MEDIA_URL = '/media/'
 
-EXEC_CODE = BASE_DIR / 'static' / 'code_exec'
+EXEC_CODE = BASE_DIR / 'uploads' / 'code_exec'
 
-EMBEDDING_ROOT = BASE_DIR / 'static' / 'bge-small-zh-v1.5'
-VECTOR_ROOT = BASE_DIR / 'static' / 'vector'
+EMBEDDING_ROOT = BASE_DIR / 'uploads' / 'bge-small-zh-v1.5'
+
+VECTOR_ROOT = BASE_DIR / 'uploads' / 'chroma'
+VECTOR_FILE = BASE_DIR / 'uploads' / 'vector_file'
 
 MARKDOWN_EXTENSIONS = [
     'markdown.extensions.extra',

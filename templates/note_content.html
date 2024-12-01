@@ -54,11 +54,11 @@
 {% block main %}
     <div class="p-7 rounded" style="color:#bcb9b9;background-color: #191818;">
         <div class="text-success">
-            <h1 style="text-align: center;font-family: Consolas,serif;font-weight:bold">{{ note.title }}</h1>
+            <h1 style="text-align: center;font-family: Consolas,serif;font-weight:bold">{{ title }}</h1>
         </div>
         <hr>
         <div class="py-2" style="text-decoration: none;">
-            {{ note.content|safe }}
+            {{ content|safe }}
         </div>
         <script>
             hljs.highlightAll();

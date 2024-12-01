@@ -1,0 +1,63 @@
+{% extends "index.html" %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'highlight/github-dark.min.css' %}">
+    <script src="{% static 'highlight/highlight.min.js' %}"></script>
+    <style>
+        td {
+            font-family: Consolas;
+            font-size: 15px;
+            border-bottom: 0.3px solid #333131;
+            border-top: 0.3px solid #333131;
+            padding: 8px;
+            vertical-align: middle;
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+    <form method="post" enctype="multipart/form-data" style="margin-top: 2px">
+        {% csrf_token %}
+        <div class="input-group" style="display: flex;justify-content: flex-end;">
+            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04"
+                   aria-label="Upload" name="file">
+            <button class="btn btn-primary" type="submit" id="inputGroupFileAddon04">保存向量数据库</button>
+        </div>
+    </form>
+    <table class="table table-bordered" style="background-color: #191818!important;color: #c5c1c1;font-family: Consolas;margin-top: 10px">
+            <thead>
+            <tr style="font-size: 20px;">
+                <th>名称</th>
+                <th>内容标签</th>
+                <th>更新时间</th>
+                <th>操作</th>
+                <th>操作</th>
+                <th>操作</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for vector in rag_vector %}
+                <tr>
+                    <td>{{ vector.name }}</td>
+                    <td>{{ vector.content_type }}</td>
+                    <td>{{ vector.update_date|date:"Y-m-d H:i:s"  }}</td>
+                    <td>
+                        <a class="btn btn-success btn-sm" href="/llm/chat_rag/?id={{ vector.id }}">RAG问答</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="/llm/browse_rag/?id={{ vector.id }}">浏览</a>
+                    </td>
+
+                    <td>
+                        <a class="btn btn-secondary btn-sm" href="/llm/edit_rag/?id={{ vector.id }}">编辑</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger btn-sm" href="/llm/delete_rag/?id={{ vector.id }}">删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}
+

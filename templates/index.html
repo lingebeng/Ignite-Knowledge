@@ -28,8 +28,8 @@
     {# @linhaifeng {% if request.path == '/main' %} text-white {% else %}text-success{% endif %} this is really a magic operation!#}
                 <li><a href="{% url "main" %}" class="nav-link px-5 {% if request.path == '/main' %} text-white {% else %}text-success{% endif %}">Main</a></li>
                 <li><a href="{% url "manage_notes"%}" class="nav-link px-2  {% if request.path == '/manage_notes' %} text-white {% else %}text-success{% endif %}" >Manage</a></li>
-                <li><a href="{% url "ai_review" %}" class="nav-link px-2 {% if request.path == '/llm/ai_review' %} text-white {% else %}text-success{% endif %}">AI Review</a></li>
-                <li><a href="{% url "ai_explore" %}" class="nav-link px-2 {% if request.path == '/llm/ai_explore' %} text-white {% else %}text-success{% endif %}">AI Explore</a></li>
+                <li><a href="{% url "ai_rag" %}" class="nav-link px-2 {% if request.path == '/llm/ai_rag' %} text-white {% else %}text-success{% endif %}">RAG_Chat</a></li>
+                <li><a href="{% url "ai_explore" %}" class="nav-link px-2 {% if request.path == '/llm/ai_explore' %} text-white {% else %}text-success{% endif %}">LLM_Chat</a></li>
                 <li><a href="{% url "manage_problems" %}" class="nav-link px-2 {% if request.path == '/codeforces/manage_problems' %} text-white {% else %}text-success{% endif %}">Codeforces</a></li>
             </ul>
 
@@ -67,9 +67,9 @@
     </div>
 </header>
 <div class="navbar-nav-scroll" style="min-height: 90vh;">
-    <main class="mb-3 container p-3 rounded" style="width: 60.6vw;min-height: 87vh;background-color: #191818;">
+    <main class="mb-3 container p-3 rounded" style="width: 66vw;min-height: 87vh;background-color: #191818;border: 1px solid #333;box-shadow: 0 0 10px rgba(51,46,46,0.5);">
     {% block main %}{% endblock %}
-</main>
+    </main>
 </div>
 <script type="text/javascript">
   MathJax.Hub.Queue(["Typeset", MathJax.Hub, "mathjax-equation"]);

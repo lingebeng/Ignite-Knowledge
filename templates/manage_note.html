@@ -28,6 +28,7 @@
             <th>操作</th>
             <th>操作</th>
             <th>操作</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
@@ -39,6 +40,9 @@
                 <td>{{ note.general_type }}</td>
                 <td>
                     <a href="/show_notes/{{ note.id }}" style="text-decoration: none;color:#47c343">进入</a>
+                </td>
+                <td>
+                    <a href="/review_note/?id={{ note.id }}" style="text-decoration: none;color:#a343c3">复习</a>
                 </td>
                 <td>
                     <a href="/edit_note/?id={{ note.id }}" style="text-decoration: none;color:#436ec3">编辑</a>
