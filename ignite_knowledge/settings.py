@@ -36,10 +36,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # @linhaifeng 此处添加我的三个应用
+    # @linhaifeng 此处添加我的四个应用
     'notes',
     'llm_app',
     'codeforces',
+    'ignite_auth',
     # @linhaifeng 此处添加用于使用markdown编辑器
     'mdeditor',
     # @linhaifeng 此处添加用于codemirror，代码编辑器
@@ -157,5 +158,18 @@ MARKDOWN_EXTENSIONS = [
     'markdown.extensions.toc',
 ]
 
+
+# 邮箱配置
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'linhaifeng0716@163.com'
+EMAIL_HOST_PASSWORD = 'HAphtENR9Ynj6bd6'
+DEFAULT_FROM_EMAIL = 'linhaifeng0716@163.com'
+
 # @linhaifeng 此处django3.0+要加上，不然会出现异常
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+# HAphtENR9Ynj6bd6

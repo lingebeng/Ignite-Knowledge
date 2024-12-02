@@ -22,6 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('notes.urls')),
+    path('', include('ignite_auth.urls')),
     path('llm/', include('llm_app.urls')),
     path('codeforces/', include('codeforces.urls')),
     path('mdeditor/',include('mdeditor.urls')),

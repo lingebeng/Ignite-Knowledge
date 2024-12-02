@@ -117,12 +117,11 @@ def judge_result(request):
         flag = True
         for x,y in zip(result.split('\n'),test_output.split('\n')):
 
-            x = x.strip()
-            y = y.strip()
+            x = x.strip().replace("'",'"').replace(" ","")
+            y = y.strip().replace("'",'"').replace(" ","")
             if x != y:
                 flag = False
                 break
-
         if flag:
             return JsonResponse('''<h1 style="color: green;text-align: center;">AC</h1>''', safe=False)
         else:
