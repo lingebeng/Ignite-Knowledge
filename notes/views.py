@@ -1,6 +1,10 @@
+from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_GET
+from llm_app.models import RAGVector
+from codeforces.models import CodeForces
 from .models import Notes
 from ignite_knowledge.utils import markdown_transfer, Model
 
@@ -31,7 +35,7 @@ def show_notes(request, note_id):
 
 
 def manage_notes(request):
-    notes = Notes.objects.all()
+    notes = Notes.objects.filter(author=request.session['info']['username']).all()
     return render(request, "manage_note.html", {"notes": notes})
 
 
@@ -76,7 +80,7 @@ def add_note(request):
         general_type = request.POST.get('general_type')
         from datetime import datetime
         update_date = datetime.now()
-        Notes.objects.create(title=title, content=content, outline=outline, content_type=content_type,
+        Notes.objects.create(author=request.session['info']['username'],title=title, content=content, outline=outline, content_type=content_type,
                              general_type=general_type, update_date=update_date)
         return redirect("/manage_notes")
 
@@ -140,3 +144,19 @@ def show_answer(request):
         "answer2": a2,
         "answer3": a3,
     }})
+
+
+@require_GET
+def search(request):
+    query = request.GET.get('query')
+    if query.startswith("code"):
+        query = query[5:]
+        problem_set = CodeForces.objects.filter(author=request.session["info"]["username"]).filter(Q(title__icontains=query) | Q(algorithm_type__icontains=query)).all()
+        return render(request, "manage_problems.html", {"problem_set": problem_set})
+    elif query.startswith("rag"):
+        query = query[4:]
+        rag_vector = RAGVector.objects.filter(author=request.session['info']['username']).filter(Q(name__icontains=query) | Q(content_type__icontains=query)).all()
+        return render(request, 'ai_rag.html', {"rag_vector": rag_vector})
+    else:
+        notes = Notes.objects.filter(author=request.session["info"]["username"]).filter(Q(outline__icontains=query)).all()
+        return render(request, 'main.html', {'notes': notes})

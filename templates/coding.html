@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/theme/monokai.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.1/mode/clike/clike.min.js"></script>
 
-
     <style>
         .CodeMirror {
             border: 1px solid rgb(10, 87, 200);
@@ -47,7 +46,9 @@
                 style="background-color: #272822;margin-bottom: 20px;border:1px solid rgb(10,87,200);font-family: Consolas,serif"
                 value="{{ language }}">
             <option value="python">Python</option>
-            <option value="text/x-c++src">C/Cpp</option>
+            <option value="text/x-csrc">C</option>
+            <option value="text/x-c++src">Cpp</option>
+            <option value="text/x-java">JAVA</option>
         </select>
 
         <textarea id="code" name="code" placeholder="123">{{ code }}</textarea>
@@ -81,30 +82,37 @@
                 pairs: "()[]{}",
                 triples: "",
                 explode: "[]{}"
-            }
+            },
         });
         document.getElementById("language-select").addEventListener("change", function () {
-            var selectedLanguage = this.value;
+            let selectedLanguage = this.value;
             editor.setOption("mode", selectedLanguage);
-            // 根据需要引入相应语言的模式文件
+
+            if(selectedLanguage === "text/x-java"){
+                editor.setValue('import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello,World");\n\n    }\n}');
+            }else if(selectedLanguage === "text/x-c++src") {
+                editor.setValue('#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\n    return 0;\n}');
+            }else if(selectedLanguage === "text/x-csrc"){
+                editor.setValue('#include<stdio.h>\n\nint main(){\n\n    return 0;\n}');
+            }else if(selectedLanguage === "python"){
+                editor.setValue('from sys import stdin\ninput = lambda:stdin.readline().strip()\n\n\n');
+            }
             CodeMirror.requireMode(selectedLanguage, function () {
                 editor.setOption("mode", selectedLanguage);
             });
         });
 
-
         $(document).ready(function () {
             $('#myForm').on('submit', function (event) {
-                event.preventDefault(); // 阻止表单默认提交行为
+                event.preventDefault();
                 var data_send = {
                     "language": document.getElementById('language-select').value,
                     "code": document.getElementById('code').value,
                     "input_data": document.getElementById('input').value,
                 };
-                {#var json_data = JSON.stringify(data_send);#}
                 $.ajax({
                     type: 'POST',
-                    url: '{% url 'exec_code' %}', // 你的Django视图URL
+                    url: '{% url 'exec_code' %}',
                     data: data_send,
                     dataType: 'json',
                     success: function (response) {

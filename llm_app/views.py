@@ -30,7 +30,7 @@ def ai_explore(request):
 
 
 def ai_rag(request):
-    rag_vector = RAGVector.objects.all()
+    rag_vector = RAGVector.objects.filter(author=request.session['info']['username']).all()
     if request.method == 'POST':
         file = request.FILES['file']
         data = file.read().decode('utf-8')
@@ -55,7 +55,7 @@ def ai_rag(request):
                                            encode_kwargs=encode_kwargs)
         Chroma.from_documents(splits, embeddings, persist_directory=vector_folder)
 
-        RAGVector.objects.create(name=prefix,content_type="Nothing",update_date=datetime.now(),suffix=suffix)
+        RAGVector.objects.create(author=request.session['info']['username'],name=prefix,content_type="Nothing",update_date=datetime.now(),suffix=suffix)
         return redirect("/llm/ai_rag")
     return render(request, 'ai_rag.html',{"rag_vector":rag_vector})
 

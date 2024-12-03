@@ -19,7 +19,7 @@
         .CodeMirror {
             border: 1px solid rgb(10, 87, 200);
             border-radius: 6px;
-            height: 44vh;
+            height: 50vh;
             font-family: Consolas, serif;
             background-color: #191818 !important;
         }
@@ -76,7 +76,9 @@
                 style="background-color: #272822;margin-bottom: 20px;border:1px solid rgb(10,87,200);font-family: Consolas,serif"
                 value="{{ language }}">
             <option value="python">Python</option>
-            <option value="text/x-c++src">C/Cpp</option>
+            <option value="text/x-csrc">C</option>
+            <option value="text/x-c++src">Cpp</option>
+            <option value="text/x-java">JAVA</option>
         </select>
 
         <textarea id="code" name="code">{{ problem.pre_code }}</textarea>
@@ -128,7 +130,17 @@
         document.getElementById("language-select").addEventListener("change", function () {
             var selectedLanguage = this.value;
             editor.setOption("mode", selectedLanguage);
-            // 根据需要引入相应语言的模式文件
+
+            if(selectedLanguage === "text/x-java"){
+                editor.setValue('import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello,World");\n\n    }\n}');
+            }else if(selectedLanguage === "text/x-c++src") {
+                editor.setValue('#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\n    return 0;\n}');
+            }else if(selectedLanguage === "text/x-csrc"){
+                editor.setValue('#include<stdio.h>\n\nint main(){\n\n    return 0;\n}');
+            }else if(selectedLanguage === "python"){
+                editor.setValue('from sys import stdin\ninput = lambda:stdin.readline().strip()\n\n\n');
+            }
+
             CodeMirror.requireMode(selectedLanguage, function () {
                 editor.setOption("mode", selectedLanguage);
             });

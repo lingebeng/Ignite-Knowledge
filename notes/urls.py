@@ -10,6 +10,8 @@ urlpatterns = [
     path("record",views.add_note,name="record"),
     path("show_answer",views.show_answer,name="show_answer"),
 
+    path("search/",views.search,name="search"),
+
 ]
 
 
