@@ -9,3 +9,4 @@ urlpatterns = [
     path("browse_rag/",views.browse_rag,name="browse_rag"),
     path("chat_rag/",views.chat_rag,name="chat_rag"),
 ]
+

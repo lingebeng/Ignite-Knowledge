@@ -24,6 +24,11 @@ def main(request):
     return render(request, 'main.html', {'notes': notes})
 
 
+
+def manage_notes(request):
+    notes = Notes.objects.filter(author=request.session['info']['username']).all()
+    return render(request, "manage_note.html", {"notes": notes})
+
 def show_notes(request, note_id):
     try:
         note = Notes.objects.get(pk=note_id)
@@ -32,11 +37,6 @@ def show_notes(request, note_id):
     note.content, note_toc = markdown_transfer(note.content)
 
     return render(request, "note_content.html", {"title":note.title,"content": note.content, "toc": note_toc})
-
-
-def manage_notes(request):
-    notes = Notes.objects.filter(author=request.session['info']['username']).all()
-    return render(request, "manage_note.html", {"notes": notes})
 
 
 def delete_note(request):
@@ -83,6 +83,8 @@ def add_note(request):
         Notes.objects.create(author=request.session['info']['username'],title=title, content=content, outline=outline, content_type=content_type,
                              general_type=general_type, update_date=update_date)
         return redirect("/manage_notes")
+
+
 
 
 def review_note(request):

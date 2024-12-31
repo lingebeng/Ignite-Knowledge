@@ -1,7 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-import re
 from .models import CodeForces
 from django.conf import settings
 import subprocess as sp
@@ -258,3 +257,5 @@ def edit_problem(request):
         update_date = datetime.now()
         CodeForces.objects.filter(id=problem_id).update(title=title,content=content,algorithm_type=algorithm_type,example_input=example_input,example_output=example_output,test_input= test_input,test_output=test_output,remarks=remarks,code=code,update_date=update_date)
         return redirect("/codeforces/manage_problems")
+
+

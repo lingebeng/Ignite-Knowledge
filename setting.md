@@ -32,4 +32,4 @@ python manage.py migrate
 ```
 在数据库里就可以看到如下变换
 
-![数据库变换](src/img1.png)
+![数据库变换](record/src/img1.png)

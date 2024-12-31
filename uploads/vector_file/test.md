@@ -1,93 +1,75 @@
-## 面试中的公共问题
+我是林海峰，来自南京农业大学，今年22岁了，目前已经大四！
 
-### 计算机基础
+RAG的四个阶段
+- 数据处理
+- 数据检索
+- 数据增强
+- 文本生成
 
-1. TCP/IP模型相关问题。
+冒泡排序基本思想： 
+通过对待排序序列从前向后（从下标较小的元素开始），
+依次对相邻两个元素的值进行两两比较，若发现逆序则交换，
+使值较大的元素逐渐从前移向后部，就如果水底下的气泡一样逐渐向上冒。
+C的代码如下所示：
+```c
+#include<stdio.h>
+int a[10] = {1,4,2,3,9,5,6,8,7,10};
+int i,j;
+// 冒泡排序：将大的数，给放到最后边，像烧开水冒出的大气泡一样！ 
+void bubble_sort(int* a){
+	int tmp,i,j,flag;
+	for(i = 0;i < 10;++i){
+		flag = 0; 
+		for(j = 0;j < 10 - 1 - i;++j){
+			if(a[j] > a[j + 1]){
+				tmp = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = tmp;
+				flag = 1;
+			}
+		}
+		if(!flag) break;
+	}
+}
+int main(){
+	bubble_sort(a);
+	for(i = 0;i < 10;++i) printf("%d ",a[i]);
+	return 0;
+}
+```
 
-   > 建议阅读阮一峰的[《互联网协议入门（一）》](http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html)和[《互联网协议入门（二）》](http://www.ruanyifeng.com/blog/2012/06/internet_protocol_suite_part_ii.html)。
 
-2. HTTP和HTTPS相关问题。
+数据库是长期存储在计算机内、有组织的、可共享的大量数据的集合！
+它的特点如下所示：
+- 数据结构化
+- 共享度高、冗余度低且易扩充
+- 独立性高
+- 数据由DBMS统一管理和控制
 
-   > 建议阅读阮一峰的[《HTTP 协议入门》](http://www.ruanyifeng.com/blog/2016/08/http.html)和[《SSL/TLS协议运行机制的概述》](http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html)。
 
-3. Linux常用命令和服务。
 
-4. 进程和线程之间的关系。什么时候用多线程？什么时候用多进程？。
+由于视图是不存在的虚表，因此对视图的更新都要最终转换成对基本表的更新！
+视图的作用：
+①简化用户操作
+②使用户以多种角度看待同一个问题
+③对重构数据库提供了一定程度的逻辑独立性
+④提供安全机制
+⑤进行更清晰的表达查询
 
-5. 关系型数据库相关问题（ACID、事务隔离级别、锁、SQL优化）。
 
-6. 非关系型数据库相关问题（CAP/BASE、应用场景）。
+字符数组与字符串常量常见的使用场景
 
-### Python基础
+char *str 通常用于指向只读的字符串，如常量字符串、配置文件中的字符串等。 用于传递字符串参数给函数，特别是当函数不需要修改字符串内容时。
 
-1. 开发中用过哪些标准库和三方库。
+char str1[]
 
-   > 标准库：sys / os / re / math / random / logging / json / pickle / shelve / socket / datetime / hashlib / configparser / urllib / itertools / collections / functools / threading / multiprocess / timeit / atexit / abc / asyncio / base64 / concurrent.futures / copy / csv / operator / enum / heapq / http / profile / pstats / ssl / unittest / uuid
-   >
-   > 三方库：openpyxl / xlrd / xlwt / PyPDF2 / ReportLab / PyYAML / jieba / pillow / requests / urllib3 / responses / aiohttp / BeautifulSoup4 / lxml / pyquery / PyMySQL / psycopg2 / redis / PyMongo / Peewee / SQLAlchemy / alipay / PyJWT / itsdangerous / celery / flower / elasticsearch-dsl-py / PyCrypto / Paramiko / logbook / nose / pytest / coverage / Selenium / lineprofiler / memoryprofiler / matplotlib / pygal / OpenCV
+用于需要修改字符串内容的场景。 作为局部字符串变量，特别是当你需要一个临时的、可修改的字符串时。 总结 char *str 指向一个字符串常量，不可修改，通常存储在只读内存区域。 char str1[] 是一个可修改的字符数组，存储在栈上或静态存储区，内容可以被修改。
+启发式搜索是一种用于求解优化问题的方法，特别是在问题的解决方案空间非常大，或者问题本身非常复杂，难以用传统方法解决时。启发式搜索通常不保证找到最优解，但是可以在合理的时间内找到足够好的解。启发式搜索算法的核心在于“启发式”或“试探性”的策略，这些策略基于问题的特定知识或经验，来指导搜索过程，从而避免盲目搜索整个解空间。
+常见的启发式搜索算法包括：
+①遗传算法：模拟自然选择和遗传学的过程，通过迭代选择和组合解来优化问题。
+②模拟退火算法：灵感来源于固体材料的退火过程，通过逐渐减小“温度”来控制搜索过程，从而避免局部最优解。
+③蚁群算法：模拟蚂蚁觅食的行为，通过信息素的积累和路径的选择来找到问题的解。
+④粒子群优化算法：模拟鸟群或鱼群的行为，通过粒子间的相互作用和信息共享来优化问题。
+这些算法各有特点，适用于不同类型的问题。在选择合适的启发式搜索算法时，需要考虑问题的特性，如解空间的大小、问题的复杂性、求解时间的要求等。
 
-2. 装饰器的作用、原理和实现。
-
-3. 使用过哪些魔法方法。
-
-   > 建议阅读[《Python魔术方法指南》](https://pycoders-weekly-chinese.readthedocs.io/en/latest/issue6/a-guide-to-pythons-magic-methods.html)。
-
-4. 生成式、生成器、迭代器的编写。
-
-5. 列表、集合、字典的底层实现。
-
-6. 垃圾回收相关问题。
-
-7. 并发编程的相关问题。
-
-8. 协程和异步I/O相关知识。
-
-### Django和Flask
-
-1. MVC架构（MTV）解决了什么问题。
-
-2. 中间件的执行流程以及如何自定义中间件。
-
-3. REST数据接口如何设计（URL、域名、版本、过滤、状态码、安全性）。
-
-   > 建议阅读阮一峰的[《RESTful API设计指南》](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)。
-
-4. 使用ORM框架实现CRUD操作的相关问题。
-
-   - 如何实现多条件组合查询 / 如何执行原生的SQL / 如何避免N+1查询问题
-
-5. 如何执行异步任务和定时任务。
-
-6. 如何实现页面缓存和查询缓存？缓存如何预热？
-
-### 爬虫相关
-
-1. Scrapy框架的组件和数据处理流程。
-2. 爬取的目的（项目中哪些地方需要用到爬虫的数据）。
-3. 使用的工具（抓包、下载、清理、存储、分析、可视化）。
-4. 数据的来源（能够轻松的列举出10个网站）。
-5. 数据的构成（抓取的某个字段在项目中有什么用）。
-6. 反反爬措施（限速、请求头、Cookie池、代理池、Selenium WebDriver、RoboBrowser、TOR、OCR）。
-7. 数据的体量（最后抓取了多少数据，多少W条数据或多少个G的数据）。
-8. 后期数据处理（持久化、数据补全、归一化、格式化、转存、分类）。
-
-### 数据分析
-
-1. 科学运算函数库（SciPy和NumPy常用运算）。
-2. 数据分析库（Pandas中封装的常用算法）。
-3. 常用的模型及对应的场景（分类、回归、聚类）。
-4. 提取了哪些具体的指标。
-5. 如何评价模型的优劣。
-6. 每种模型实际操作的步骤，对结果如何评价。
-
-### 项目相关
-
-1. 项目团队构成以及自己在团队中扮演的角色（在项目中的职责）。
-2. 项目的业务架构（哪些模块及子模块）和技术架构（移动端、PC端、后端技术栈）。
-3. 软件控制管理相关工具（版本控制、问题管理、持续集成）。
-4. 核心业务实体及其属性，实体与实体之间的关系。
-5. 用到哪些依赖库，依赖库主要解决哪方面的问题。
-6. 项目如何部署上线以及项目的物理架构（Nginx、Gunicorn/uWSGI、Redis、MongoDB、MySQL、Supervisor等）。
-7. 如何对项目进行测试，有没有做过性能调优。
-8. 项目中遇到的困难有哪些，如何解决的。
 

@@ -1,12 +1,8 @@
-from sys import stdin
-
-input = lambda:stdin.readline().strip()
-
-def gcd_func(a,b):
 
 
-T = int(input())
 
-for _ in range(T):
-    a,b = map(int,input().split())
-    print(gcd_func(a,b))
+
+
+x,y = map(int,input().split())
+
+print(f"{x}与{y}的和是{x + y}")

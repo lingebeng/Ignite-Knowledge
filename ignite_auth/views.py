@@ -3,7 +3,7 @@ import string
 from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_http_methods, require_GET
 from .forms import RegisterForm,LoginForm
 from .models import User,ValidCode
 from datetime import datetime
@@ -58,7 +58,7 @@ def register(request):
 def logout(request):
     return redirect("/login")
 
-
+@require_GET
 def send_email(request):
     email = request.GET.get('email')
     if not email:

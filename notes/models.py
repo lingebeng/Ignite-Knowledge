@@ -14,7 +14,7 @@ class Notes(models.Model):
     update_date = models.DateTimeField(auto_now=True,null=True)
 
     class Meta:
-        ordering = ['-update_date','-general_type']
+        ordering = ['-update_date','-general_type']  # 按照更新时间与通用类别进行排序
 
 
 

@@ -3,7 +3,7 @@ from django.db import models
 
 class RAGVector(models.Model):
     """
-    RAGVector(作者,名称,内容标签,更新时间)
+    RAGVector(作者,名称,文件后缀名,内容标签,更新时间)
     """
     author = models.CharField(max_length=40,null=True,blank=True)
 
@@ -17,3 +17,5 @@ class RAGVector(models.Model):
 
     class Meta:
         ordering = ['-update_date']
+
+

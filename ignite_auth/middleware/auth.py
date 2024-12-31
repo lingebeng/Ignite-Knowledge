@@ -4,11 +4,8 @@ from django.utils.deprecation import MiddlewareMixin
 class AuthMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
-
-        if request.path_info == '/login' or request.path_info == '/register':
+        if request.path_info in ('/login','/register','/send_email/','/send_email',):
             return
-
-        info = request.session.get('info')
-        if info:
+        if request.session.get('info'):
             return
         return redirect("/login")
